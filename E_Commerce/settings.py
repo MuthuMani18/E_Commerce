@@ -39,9 +39,10 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'rest_framework',
- 
+    'django_filters',
     'user',
     'My_Addresses',
+    'product',
 ]
 
 MIDDLEWARE = [
@@ -131,3 +132,16 @@ AUTH_USER_MODEL = 'user.User'
 CORS_ORIGIN_ALLOW_ALL = True
 CORS_ALLOW_CREDETIALS = True
 
+
+REST_FRAMEWORK = {
+    'DEFAULT_FILTER_BACKENDS': [
+        'django_filters.rest_framework.DjangoFilterBackend'
+    ],
+    'DEFAULT_AUTHENTICATION_CLASSES': [
+        'rest_framework_simplejwt.authentication.JWTAuthentication',
+    ],
+}
+
+REST_FRAMEWORK = {
+    'DEFAULT_FILTER_BACKENDS': ['django_filters.rest_framework.DjangoFilterBackend']
+}

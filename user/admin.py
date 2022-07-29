@@ -3,8 +3,8 @@ from . import models
 
 
 class UserAdmin(admin.ModelAdmin):
-    list_display = ("id", "first_name", "last_name", "email","user_type")
-  
+    list_display = ("id", "first_name", "last_name", "email", "user_type")
+
     """
     fieldsets = (
       ('User Credentials', {'fields': ('email', 'password')}),
@@ -12,8 +12,10 @@ class UserAdmin(admin.ModelAdmin):
      
     )     
 """
-    
-    search_fields = ('email',)
+
+    search_fields = ['email']
     ordering = ['id']
     filter_horizontal = ()
+
+
 admin.site.register(models.User, UserAdmin)

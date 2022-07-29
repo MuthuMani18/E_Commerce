@@ -1,7 +1,6 @@
 from random import choices
 from django.db import models
 from django.contrib.auth import models as auth_models
-from django.contrib.auth.hashers import make_password
 
 
 class UserManager(auth_models.BaseUserManager):
@@ -28,13 +27,6 @@ class UserManager(auth_models.BaseUserManager):
         user.is_active = True
         user.is_staff = is_staff
         user.is_superuser = is_superuser
-        buyer = 'buyer'
-        seller = 'seller'
-        typ = [
-            (buyer, 'buyer'),
-            (seller,'seller'),
-        ]
-        user_type = models.CharField(max_length=100,blank=False, choices=typ, default=buyer)
         user.save()
 
         return user
@@ -46,7 +38,7 @@ class UserManager(auth_models.BaseUserManager):
             first_name=first_name,
             last_name=last_name,
             email=email,
-            password=make_password(password),
+            password=password,
             is_staff=True,
             is_superuser=True,
         )
@@ -61,8 +53,8 @@ class User(auth_models.AbstractUser):
   
     email = models.EmailField(verbose_name="Email", max_length=255, unique=True)
     USER_CHOICES =(
-        ('buyer', 'BUYER'),
-        ('seller','SELLER')
+        ('buyer', 'buyer'),
+        ('seller','seller')
     )
     user_type = models.CharField(verbose_name="USER_TYPE", max_length=10, choices = USER_CHOICES)
     password = models.CharField(max_length=255)
