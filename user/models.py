@@ -1,4 +1,3 @@
-from random import choices
 from django.db import models
 from django.contrib.auth import models as auth_models
 
@@ -50,20 +49,19 @@ class UserManager(auth_models.BaseUserManager):
 class User(auth_models.AbstractUser):
     first_name = models.CharField(verbose_name="First Name", max_length=255)
     last_name = models.CharField(verbose_name="Last Name", max_length=255)
-  
-    email = models.EmailField(verbose_name="Email", max_length=255, unique=True)
-    USER_CHOICES =(
+
+    email = models.EmailField(verbose_name="Email",
+                              max_length=255, unique=True)
+    USER_CHOICES = (
         ('buyer', 'buyer'),
-        ('seller','seller')
+        ('seller', 'seller')
     )
-    user_type = models.CharField(verbose_name="USER_TYPE", max_length=10, choices = USER_CHOICES)
+    user_type = models.CharField(
+        verbose_name="USER_TYPE", max_length=10, choices=USER_CHOICES)
     password = models.CharField(max_length=255)
     mobile = models.CharField(max_length=12)
     username = None
     USERNAME_FIELD = "email"
-    REQUIRED_FIELDS = ["first_name","last_name"]
+    REQUIRED_FIELDS = ["first_name", "last_name"]
 
-    
     objects = UserManager()
-     
-   

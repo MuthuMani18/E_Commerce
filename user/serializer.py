@@ -1,6 +1,9 @@
+from django.contrib.auth.models import User
 from random import choices
 from rest_framework import serializers
 from . import services
+from rest_framework import serializers
+from user.models import User
 
 
 class UserSerializer(serializers.Serializer):
@@ -16,3 +19,10 @@ class UserSerializer(serializers.Serializer):
         data = super().to_internal_value(data)
 
         return services.UserDataClass(**data)
+
+
+class ChangePasswordSerializer(serializers.Serializer):
+    model = User
+
+    old_password = serializers.CharField(required=True)
+    new_password = serializers.CharField(required=True)
